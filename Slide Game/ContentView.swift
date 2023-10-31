@@ -14,6 +14,7 @@ struct ContentView: View {
     @State var numbersShuffled = ["1", "2", "3", "4", "5", "6", "7", "8", "nil"]
     @State private var scale = 1.0
     @State private var start = false
+    @State var isComplete = false
     var body: some View {
         /*VStack {
             Text("A Text view")
@@ -49,11 +50,6 @@ struct ContentView: View {
                     //actions go here
                     //move.toggle()
                     if ((index == n - 1 || index == n + 1 || index == n - 3 || index == n + 3) && (index % 3 == n % 3 || index / 3 == n / 3)) {
-                        /*let temp = n
-                        let tempVal = numbersShuffled[n]
-                        n = index
-                        numbersShuffled[temp] = numbersShuffled[n]
-                        numbersShuffled[n] = tempVal*/
                         numbersShuffled.swapAt(n, index)
                         n = index
                     }
@@ -66,209 +62,22 @@ struct ContentView: View {
                 .frame(width: 50, height: 50)
                 .offset(x: move ? CGFloat(((index % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move ? CGFloat(((index) / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
                 .animation(.linear, value: move)
-                /*.onTapGesture {
+                .onTapGesture {
                     move.toggle()
-                }*/
+                }
             }
         }
-        
-        /*ZStack{
-            Button(action:{
-                //actions go here
-                move = 0
-                if ((0 == n - 1 || 0 == n + 1 || 0 == n - 3 || 0 == n + 3) && (0 % 3 == n % 3 || 0 / 3 == n / 3)) {
-                    let temp = n
-                    let tempVal = numbersShuffled[n]
-                    n = 0
-                    numbersShuffled[temp] = numbersShuffled[n]
-                    numbersShuffled[n] = tempVal
-                    //numbersShuffled.swapAt(n, index)
-                }
-                //move.toggle()
-            }, label:{
-                Text("\(numbersShuffled[0] == "nil" ? " " : numbersShuffled[0])")
-                    .frame(width: 50, height: 50)
-                    .fontWeight(.semibold)
-            })
-            .frame(width: 50, height: 50)
-            .offset(x: move == 0 ? CGFloat(((0 % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move == 0 ? CGFloat((0 / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
-            .animation(.linear, value: move)
-            
-            Button(action:{
-                //actions go here
-                move = 1
-                if ((1 == n - 1 || 1 == n + 1 || 1 == n - 3 || 1 == n + 3) && (1 % 3 == n % 3 || 1 / 3 == n / 3)) {
-                    let temp = n
-                    let tempVal = numbersShuffled[n]
-                    n = 1
-                    numbersShuffled[temp] = numbersShuffled[n]
-                    numbersShuffled[n] = tempVal
-                    //numbersShuffled.swapAt(n, index)
-                }
-                //move.toggle()
-            }, label:{
-                Text("\(numbersShuffled[1] == "nil" ? " " : numbersShuffled[1])")
-                    .frame(width: 50, height: 50)
-                    .fontWeight(.semibold)
-            })
-            .frame(width: 50, height: 50)
-            .offset(x: move == 1 ? CGFloat(((1 % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move == 1 ? CGFloat((1 / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
-            .animation(.linear, value: move)
-            
-            Button(action:{
-                //actions go here
-                move = 2
-                if ((move == n - 1 || move == n + 1 || move == n - 3 || move == n + 3) && (move % 3 == n % 3 || move / 3 == n / 3)) {
-                    let temp = n
-                    let tempVal = numbersShuffled[n]
-                    n = move
-                    numbersShuffled[temp] = numbersShuffled[n]
-                    numbersShuffled[n] = tempVal
-                    //numbersShuffled.swapAt(n, index)
-                }
-                //move.toggle()
-            }, label:{
-                Text("\(numbersShuffled[2] == "nil" ? " " : numbersShuffled[2])")
-                    .frame(width: 50, height: 50)
-                    .fontWeight(.semibold)
-            })
-            .frame(width: 50, height: 50)
-            .offset(x: move == 2 ? CGFloat(((move % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move == 2 ? CGFloat((move / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
-            .animation(.linear, value: move)
-            
-            Button(action:{
-                //actions go here
-                move = 3
-                if ((move == n - 1 || move == n + 1 || move == n - 3 || move == n + 3) && (move % 3 == n % 3 || move / 3 == n / 3)) {
-                    let temp = n
-                    let tempVal = numbersShuffled[n]
-                    n = move
-                    numbersShuffled[temp] = numbersShuffled[n]
-                    numbersShuffled[n] = tempVal
-                    //numbersShuffled.swapAt(n, index)
-                }
-                //move.toggle()
-            }, label:{
-                Text("\(numbersShuffled[3] == "nil" ? " " : numbersShuffled[3])")
-                    .frame(width: 50, height: 50)
-                    .fontWeight(.semibold)
-            })
-            .frame(width: 50, height: 50)
-            .offset(x: move == 3 ? CGFloat(((move % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move == 3 ? CGFloat((move / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
-            .animation(.linear, value: move)
-            
-            Button(action:{
-                //actions go here
-                move = 4
-                if ((move == n - 1 || move == n + 1 || move == n - 3 || move == n + 3) && (move % 3 == n % 3 || move / 3 == n / 3)) {
-                    let temp = n
-                    let tempVal = numbersShuffled[n]
-                    n = move
-                    numbersShuffled[temp] = numbersShuffled[n]
-                    numbersShuffled[n] = tempVal
-                    //numbersShuffled.swapAt(n, index)
-                }
-                //move.toggle()
-            }, label:{
-                Text("\(numbersShuffled[4] == "nil" ? " " : numbersShuffled[4])")
-                    .frame(width: 50, height: 50)
-                    .fontWeight(.semibold)
-            })
-            .frame(width: 50, height: 50)
-            .offset(x: move == 4 ? CGFloat(((move % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move == 4 ? CGFloat((move / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
-            .animation(.linear, value: move)
-            Button(action:{
-                //actions go here
-                move = 5
-                if ((move == n - 1 || move == n + 1 || move == n - 3 || move == n + 3) && (move % 3 == n % 3 || move / 3 == n / 3)) {
-                    let temp = n
-                    let tempVal = numbersShuffled[n]
-                    n = move
-                    numbersShuffled[temp] = numbersShuffled[n]
-                    numbersShuffled[n] = tempVal
-                    //numbersShuffled.swapAt(n, index)
-                }
-                //move.toggle()
-            }, label:{
-                Text("\(numbersShuffled[5] == "nil" ? " " : numbersShuffled[5])")
-                    .frame(width: 50, height: 50)
-                    .fontWeight(.semibold)
-            })
-            .frame(width: 50, height: 50)
-            .offset(x: move == 5 ? CGFloat(((move % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move == 5 ? CGFloat((move / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
-            .animation(.linear, value: move)
-            Button(action:{
-                //actions go here
-                move = 6
-                if ((move == n - 1 || move == n + 1 || move == n - 3 || move == n + 3) && (move % 3 == n % 3 || move / 3 == n / 3)) {
-                    let temp = n
-                    let tempVal = numbersShuffled[n]
-                    n = move
-                    numbersShuffled[temp] = numbersShuffled[n]
-                    numbersShuffled[n] = tempVal
-                    //numbersShuffled.swapAt(n, index)
-                }
-                //move.toggle()
-            }, label:{
-                Text("\(numbersShuffled[6] == "nil" ? " " : numbersShuffled[6])")
-                    .frame(width: 50, height: 50)
-                    .fontWeight(.semibold)
-            })
-            .frame(width: 50, height: 50)
-            .offset(x: move == 6 ? CGFloat(((move % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move == 3 ? CGFloat((move / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
-            .animation(.linear, value: move)
-            Button(action:{
-                //actions go here
-                move = 7
-                if ((move == n - 1 || move == n + 1 || move == n - 3 || move == n + 3) && (move % 3 == n % 3 || move / 3 == n / 3)) {
-                    let temp = n
-                    let tempVal = numbersShuffled[n]
-                    n = move
-                    numbersShuffled[temp] = numbersShuffled[n]
-                    numbersShuffled[n] = tempVal
-                    //numbersShuffled.swapAt(n, index)
-                }
-                //move.toggle()
-            }, label:{
-                Text("\(numbersShuffled[7] == "nil" ? " " : numbersShuffled[7])")
-                    .frame(width: 50, height: 50)
-                    .fontWeight(.semibold)
-            })
-            .frame(width: 50, height: 50)
-            .offset(x: move == 7 ? CGFloat(((move % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move == 7 ? CGFloat((move / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
-            .animation(.linear, value: move)
-            Button(action:{
-                //actions go here
-                move = 8
-                if ((move == n - 1 || move == n + 1 || move == n - 3 || move == n + 3) && (move % 3 == n % 3 || move / 3 == n / 3)) {
-                    let temp = n
-                    let tempVal = numbersShuffled[n]
-                    n = move
-                    numbersShuffled[temp] = numbersShuffled[n]
-                    numbersShuffled[n] = tempVal
-                    //numbersShuffled.swapAt(n, index)
-                }
-                //move.toggle()
-            }, label:{
-                Text("\(numbersShuffled[8] == "nil" ? " " : numbersShuffled[8])")
-                    .frame(width: 50, height: 50)
-                    .fontWeight(.semibold)
-            })
-            .frame(width: 50, height: 50)
-            .offset(x: move == 8 ? CGFloat(((move % 3) * 100) - 100) : CGFloat(((n % 3) * 100) - 100), y: move == 8 ? CGFloat((move / 3) * 100) - 100 : CGFloat(((n % 3) * 100) - 100))
-            .animation(.linear, value: move)
-        }*/
-        
         Button(action:{
                 //actions go here
-            numbersShuffled = numbers.shuffled()
+            numbersShuffled.shuffle()
             /*if let n = numbersShuffled.firstIndex(where: { $0.starts(with: "nil") }) {
                print("Index of \("nil") is \(n)")
             } else {
                print("\("nil") is not in the list")
             }*/
-            let n = numbersShuffled.firstIndex(of: "nil")
+            n = numbersShuffled.firstIndex(of: "nil")!
             print("Index of \("nil") is \(n)")
+            isComplete = false
         }, label:{
             Text("Start New Game")
             .fontWeight(.semibold)
